@@ -536,6 +536,7 @@
 		/obj/item/storage/backpack/chameleon,
 		/obj/item/device/chameleon,
 		/obj/item/clothing/suit/space/syndicate/specialist,
+		/obj/item/storage/box/syndibox,
 		/obj/item/clothing/head/helmet/space/syndicate/specialist/infiltrator)
 
 	scout
