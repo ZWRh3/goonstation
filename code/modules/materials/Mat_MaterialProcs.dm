@@ -159,6 +159,7 @@ triggerOnEntered(var/atom/owner, var/atom/entering)
 	desc = "It makes your hands itch."
 
 	execute(var/mob/M, var/obj/item/I, mult)
+		if(issilicon(M)) return // silicons can't get itchy
 		if(probmult(20)) M.emote(pick("twitch", "laugh", "sneeze", "cry"))
 		if(probmult(10))
 			boutput(M, "<span class='notice'><b>Something tickles!</b></span>")
@@ -525,7 +526,7 @@ triggerOnEntered(var/atom/owner, var/atom/entering)
 
 /datum/materialProc/slippery_entered
 	execute(var/atom/owner, var/atom/movable/entering)
-		if (isliving(entering) && isturf(owner) && prob(75))
+		if (isliving(entering) && isturf(owner) && prob(75) && !isintangible(entering))
 			var/mob/living/L = entering
 			if(L.slip(walking_matters = 1))
 				boutput(L, "You slip on the icy floor!")

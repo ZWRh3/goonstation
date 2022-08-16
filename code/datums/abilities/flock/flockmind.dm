@@ -126,7 +126,7 @@
 /datum/targetable/flockmindAbility/designateTile/cast(atom/target)
 	if(..())
 		return TRUE
-	var/mob/living/intangible/flock/flockmind/F = holder.owner
+	var/mob/living/intangible/flock/F = holder.owner
 	var/turf/T = get_turf(target)
 	if(!(istype(T, /turf/simulated) || istype(T, /turf/space)))
 		boutput(holder.get_controlling_mob(), "<span class='alert'>The flock can't convert this.</span>")
@@ -299,7 +299,7 @@
 		playsound(holder.get_controlling_mob(), "sound/misc/flockmind/flockmind_cast.ogg", 80, 1)
 		boutput(holder.get_controlling_mob(), "<span class='notice'>You transmit the worst static you can weave into the headsets around you.</span>")
 		for(var/mob/living/M in targets)
-			playsound(M, "sound/effects/radio_sweep[rand(1,5)].ogg", 100, 1)
+			playsound(M, "sound/effects/radio_sweep[rand(1,5)].ogg", 70, 1)
 			boutput(M, "<span class='alert'>Horrifying static bursts into your headset, disorienting you severely!</span>")
 			M.apply_sonic_stun(3, 6, 60, 0, 0, rand(1, 3), rand(1, 3))
 	else
@@ -335,7 +335,7 @@
 			logTheThing("say", usr, target, "Narrowbeam Transmission to [constructTarget(target,"say")]: [message]")
 			message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
 			var/flockName = "--.--"
-			var/mob/living/intangible/flock/flockmind/F = holder.owner
+			var/mob/living/intangible/flock/F = holder.owner
 			var/datum/flock/flock = F.flock
 			if(flock)
 				flockName = flock.name

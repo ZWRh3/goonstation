@@ -1546,13 +1546,7 @@ var/global/list/ai_emotions = list("Happy" = "ai_happy", \
 	set category = "AI Commands"
 	set name = "View Crew Manifest"
 
-	var/stored = ""
-	if(length(by_type[/obj/cryotron]))
-		var/obj/cryotron/cryo_unit = pick(by_type[/obj/cryotron])
-		for(var/L as anything in cryo_unit.stored_crew_names)
-			stored += "<i>- [L]<i><br>"
-
-	usr.Browse("<head><title>Crew Manifest</title></head><body><tt><b>Crew Manifest:</b><hr>[get_manifest()]<br><b>In Cryogenic Storage:</b><hr>[stored]</tt></body>", "window=aimanifest")
+	usr.Browse("<head><title>Crew Manifest</title></head><body><tt><b>Crew Manifest:</b><hr>[get_manifest()]</tt></body>", "window=aimanifest")
 
 
 /mob/living/silicon/ai/proc/show_laws_verb()
@@ -1996,8 +1990,8 @@ var/global/list/ai_emotions = list("Happy" = "ai_happy", \
 	if (!message_mob.client || isdead(src))
 		return
 
-	if (!ON_COOLDOWN(src, "ai_self_rename", src.rename_cooldown))
-		choose_name(retries = 3, default_name = src.real_name, renaming_mob = message_mob)
+	if (!GET_COOLDOWN(src, "ai_self_rename"))
+		choose_name(retries = 3, renaming_mob = message_mob)
 	else
 		src.show_text("This ability is still on cooldown for [round(GET_COOLDOWN(src, "ai_self_rename") / 10)] seconds!", "red")
 
@@ -2456,6 +2450,7 @@ proc/get_mobs_trackable_by_AI()
 					src.real_name = newname
 					if (src.deployed_to_eyecam)
 						src.eyecam.real_name = newname
+					ON_COOLDOWN(src, "ai_self_rename", src.rename_cooldown)
 					break
 				else
 					continue

@@ -747,11 +747,6 @@
 	default_material = "erebite"
 	icon_state = "martian-bar"
 
-/obj/item/material_piece/gold
-	name = "stamped bullion"
-	desc = "Oh wow! This stuff's got to be worth a lot of money!"
-	default_material = "gold"
-
 /obj/item/material_piece/ice
 	desc = "Uh. What's the point in this? Is someone planning to make an igloo?"
 	default_material = "ice"
@@ -915,12 +910,12 @@
 			if (.)
 				user.visible_message("<b>[user.name]</b> loads [W] into [src].")
 				playsound(src, sound_load, 40, 1)
-		else if (load_reclaim(W, user))
-			boutput(user, "You load [W] into [src].")
-			playsound(src, sound_load, 40, 1)
 		else if (W.cant_drop)
 			boutput(user, "<span class='alert'>You can't put that in [src] when it's attached to you!</span>")
 			return ..()
+		else if (load_reclaim(W, user))
+			boutput(user, "You load [W] into [src].")
+			playsound(src, sound_load, 40, 1)
 		else
 			. = ..()
 
