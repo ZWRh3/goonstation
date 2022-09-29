@@ -459,12 +459,17 @@
 
 
 /proc/populate_station(chance=100)
+	var/list/jobs = list()
 	for(var/job_name in job_start_locations)
+		if(job_name in jobs)
+			continue
 		if(job_name == "AI")
 			continue
+		jobs[job_name] = 1
+		LAGCHECK(LAG_HIGH)
 		for(var/turf/T in job_start_locations[job_name])
 			if(prob(chance))
-				var/mob/living/carbon/human/normal/H = new(T)
+				var/mob/living/carbon/human/monkey/H = new(T)
 				H.JobEquipSpawned(job_name)
 
 
