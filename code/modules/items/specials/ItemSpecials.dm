@@ -460,8 +460,6 @@
 		name = "Heavy Attack"
 		desc = "A powerful, but slow and draining attack."
 		staminaCost = 35
-		moveDelay = 5
-		moveDelayDuration = 5
 		animation_color = "#a3774d"
 
 /datum/item_special/rangestab
@@ -1158,8 +1156,6 @@ ABSTRACT_TYPE(/datum/item_special/spark)
 /datum/item_special/barrier
 	cooldown = 0
 	staminaCost = 0
-	moveDelay = 7
-	moveDelayDuration = 6
 	damageMult = 1
 	restrainDuration = 3
 	image = "barrier"
