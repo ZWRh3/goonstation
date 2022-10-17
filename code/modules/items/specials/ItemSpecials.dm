@@ -165,8 +165,6 @@
 
 	var/cooldown = 20			//Cooldown time of attack
 	var/staminaCost = 15		//Stamina cost of attack
-	var/moveDelay = 10		//Slow movement by this much after attack
-	var/moveDelayDuration = 10 //Slow for this long (in BYOND time)
 	var/restrainDuration = 0 //time in 1/10th seconds during which we are held in place following an attack
 
 	var/overrideCrit = 0 //Temporarily switch item to this crit chance during attacks. (if not -1/negative)
@@ -263,13 +261,6 @@
 				cost = min(cost,H.stamina - STAMINA_MIN_ATTACK)
 				H.remove_stamina(cost)
 
-		if(moveDelayDuration && moveDelay)
-			SPAWN(0)
-				person.movement_delay_modifier += moveDelay
-				person.apply_movement_delay_until = world.time + moveDelayDuration //handle move() started mid-delay
-				sleep(moveDelayDuration)
-				person.movement_delay_modifier = 0
-				person.apply_movement_delay_until = -1
 		last_use = world.time
 
 	//Should be called after everything is done and all attacks are finished. Make sure you call this when appropriate in your mouse procs etc.
@@ -397,8 +388,6 @@
 /datum/item_special/throwing
 	cooldown = 10
 	staminaCost = 5
-	moveDelay = 0
-	moveDelayDuration = 0
 	overrideCrit = -1
 
 	image = "throw"
@@ -422,8 +411,6 @@
 /datum/item_special/simple
 	cooldown = 0
 	staminaCost = 0
-	moveDelay = 0//5
-	moveDelayDuration = 0//4
 	damageMult = 1
 
 	image = "simple"
@@ -471,15 +458,11 @@
 		name = "Heavy Attack"
 		desc = "A powerful, but slow and draining attack."
 		staminaCost = 35
-		moveDelay = 5
-		moveDelayDuration = 5
 		animation_color = "#a3774d"
 
 /datum/item_special/rangestab
 	cooldown = 0 //10
 	staminaCost = 5
-	moveDelay = 5
-	moveDelayDuration = 5
 
 	image = "stab"
 	name = "Stab"
@@ -544,8 +527,6 @@
 /datum/item_special/swipe
 	cooldown = 0 //30
 	staminaCost = 5
-	moveDelay = 5
-	moveDelayDuration = 5
 
 	damageMult = 1
 
@@ -678,7 +659,6 @@
 /datum/item_special/launch_projectile
 	cooldown = 3 SECONDS
 	staminaCost = 30
-	moveDelay = 0
 	requiresStaminaToFire = TRUE
 	staminaReqAmt = 30
 	/// projectile datum containing data for projectile objects
@@ -729,8 +709,6 @@
 /datum/item_special/slam
 	cooldown = 50
 	staminaCost = 30
-	moveDelay = 10
-	moveDelayDuration = 20
 	restrainDuration = 1
 	damageMult = 0.22
 
@@ -882,8 +860,6 @@
 /datum/item_special/disarm
 	cooldown = 0
 	staminaCost = 0
-	moveDelay = 0
-	moveDelayDuration = 0
 
 	image = "conc"
 	name = "Shove"
@@ -930,8 +906,6 @@
 /datum/item_special/harm
 	cooldown = 0
 	staminaCost = 0//todo: adjust?
-	moveDelay = 0
-	moveDelayDuration = 0
 
 	image = "conc"
 	name = "Harm"
@@ -1027,8 +1001,6 @@
 ABSTRACT_TYPE(/datum/item_special/spark)
 /datum/item_special/spark
 	cooldown = 0
-	moveDelay = 5
-	moveDelayDuration = 3
 
 	image = "sparks"
 	name = "Spark"
@@ -1127,8 +1099,6 @@ ABSTRACT_TYPE(/datum/item_special/spark)
 /datum/item_special/double
 	cooldown = 0
 	staminaCost = 0
-	moveDelay = 5
-	moveDelayDuration = 5
 	damageMult = 0.8
 	image = "dagger"
 	name = "Slice"
@@ -1184,8 +1154,6 @@ ABSTRACT_TYPE(/datum/item_special/spark)
 /datum/item_special/barrier
 	cooldown = 0
 	staminaCost = 0
-	moveDelay = 7
-	moveDelayDuration = 6
 	damageMult = 1
 	restrainDuration = 3
 	image = "barrier"
@@ -1243,8 +1211,6 @@ ABSTRACT_TYPE(/datum/item_special/spark)
 
 /datum/item_special/flame
 	cooldown = 0
-	moveDelay = 5
-	moveDelayDuration = 2
 	damageMult = 0.8
 	image = "flame"
 	name = "Flame"
@@ -1327,8 +1293,6 @@ ABSTRACT_TYPE(/datum/item_special/spark)
 
 /datum/item_special/elecflash
 	cooldown = 0
-	moveDelay = 5
-	moveDelayDuration = 2
 	damageMult = 0.8
 	image = "pulse"
 	name = "Pulse"
@@ -1369,8 +1333,6 @@ ABSTRACT_TYPE(/datum/item_special/spark)
 ///////////////////////////////////
 /datum/item_special/spark/ntso
 	cooldown = 0
-	moveDelay = 5
-	moveDelayDuration = 2
 
 	image = "baton-spark-ntso"
 	name = "Baton Hit"
@@ -1456,8 +1418,6 @@ ABSTRACT_TYPE(/datum/item_special/spark)
 
 /datum/item_special/katana_dash
 	cooldown = 9
-	moveDelay = 0
-	moveDelayDuration = 0
 	staminaCost = 30		//Stamina cost of attack
 	requiresStaminaToFire = 1
 	staminaReqAmt = 80
@@ -1577,8 +1537,6 @@ ABSTRACT_TYPE(/datum/item_special/spark)
 
 /datum/item_special/katana_dash/limb
 	cooldown = 0
-	moveDelay = 0
-	moveDelayDuration = 0
 	staminaCost = 30		//Stamina cost of attack
 	requiresStaminaToFire = 1
 	staminaReqAmt = 0
@@ -1694,9 +1652,6 @@ ABSTRACT_TYPE(/datum/item_special/spark)
 /datum/item_special/nunchucks
 	cooldown = 30
 	staminaCost = 40
-	moveDelay = 5
-	moveDelayDuration = 5
-
 	damageMult = 0.8
 
 	image = "dagger"
@@ -1755,8 +1710,6 @@ ABSTRACT_TYPE(/datum/item_special/spark)
 /datum/item_special/tile_fling
 	cooldown = 0
 	staminaCost = 0
-	moveDelay = 0
-	moveDelayDuration = 0
 	damageMult = 1
 
 	image = "throw"
