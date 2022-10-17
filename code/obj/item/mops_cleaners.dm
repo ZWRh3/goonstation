@@ -1087,14 +1087,10 @@ WET FLOOR SIGN
 		suck.suck_in_range = 3
 		suck.throw_range = 10
 		suck.throw_speed = 1
-		suck.moveDelayDuration = 5
-		suck.moveDelay = 4
 
 /datum/item_special/suck
 	cooldown = 30
 	staminaCost = 10
-	moveDelay = 8
-	moveDelayDuration = 10
 	var/range = 3
 	var/suck_in_range = 1
 	var/throw_range = 2
