@@ -263,13 +263,6 @@
 				cost = min(cost,H.stamina - STAMINA_MIN_ATTACK)
 				H.remove_stamina(cost)
 
-		if(moveDelayDuration && moveDelay)
-			SPAWN(0)
-				person.movement_delay_modifier += moveDelay
-				person.apply_movement_delay_until = world.time + moveDelayDuration //handle move() started mid-delay
-				sleep(moveDelayDuration)
-				person.movement_delay_modifier = 0
-				person.apply_movement_delay_until = -1
 		last_use = world.time
 
 	//Should be called after everything is done and all attacks are finished. Make sure you call this when appropriate in your mouse procs etc.
@@ -1163,8 +1156,6 @@ ABSTRACT_TYPE(/datum/item_special/spark)
 /datum/item_special/barrier
 	cooldown = 0
 	staminaCost = 0
-	moveDelay = 7
-	moveDelayDuration = 6
 	damageMult = 1
 	restrainDuration = 3
 	image = "barrier"
