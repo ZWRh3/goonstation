@@ -149,7 +149,7 @@
 /mob/living/silicon/ai/do_suicide()
 	var/confirm = tgui_alert(src, "Are you sure you want to commit suicide?", "Confirm Suicide", list("Yes", "No"), 15 SECONDS)
 	if (confirm == "Yes")
-		src.visible_message("<span class='alert'><b>[src] is powering down. It looks like \he's trying to commit suicide.</b></span>")
+		src.visible_message("<span class='alert'><b>[src] is powering down. It looks like [hes_or_shes(src)] trying to commit suicide.</b></span>")
 		src.unlock_medal("Damned", 1)
 		SPAWN(3 SECONDS)
 			src.death()
