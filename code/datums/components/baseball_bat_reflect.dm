@@ -21,7 +21,7 @@ TYPEINFO(/datum/component/holdertargeting/baseball_bat_reflect)
 		angle_deviation_max -= (20 - drunkenness) * 3 * 2
 	else
 		angle_deviation_max *= 2
-	if(owner.bioHolder?.HasEffect("blind"))
+	if(!owner.sight_check())
 		angle_deviation_max *= 20
 	angle_deviation_max += owner.eye_blurry + owner.eye_damage
 

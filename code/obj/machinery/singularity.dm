@@ -471,7 +471,7 @@ for some reason I brought it back and tried to clean it up a bit and I regret ev
 	for (var/mob/living/carbon/M in hearers(radius*EVENT_GROWTH+EVENT_MINIMUM, src.get_center()))
 		if (ishuman(M))
 			var/mob/living/carbon/human/H = M
-			if (H.bioHolder?.HasEffect("blind") || H.blinded)
+			if (!H.sight_check())
 				return
 			else if (istype(H.glasses,/obj/item/clothing/glasses/meson))
 				M.show_text("You look directly into [src.name], good thing you had your protective eyewear on!", "green")
